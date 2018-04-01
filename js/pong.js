@@ -1,4 +1,5 @@
 var myId=0;
+var myIdx=-1;
 var paddlesList;
 var paddle;
 var player;
@@ -18,27 +19,30 @@ var eurecaClientSetup = function () {
 
     //methods defined under "exports" namespace become available in the server side
 
-    eurecaClient.exports.setId = function (id) {
+    eurecaClient.exports.setId = function (id, idx) {
         //create() is moved here to make sure nothing is created before uniq id assignation
         myId = id;
-        console.log('Client ready=true...%s', myId);
+        myIdx = idx;
+        console.log('Client setId. id: %s, idx: %s', myId, idx);
         create();
+        console.log('Client setId. After Create(). Calling Servers handshake.');
         eurecaServer.handshake();
         ready = true;
+        console.log('Client setId. ready=true');
     }
 
     eurecaClient.exports.kill = function (id) {
         if (paddlesList[id]) {
             paddlesList[id].kill();
-            console.log('killing ', id, paddlesList[id]);
+            console.log('Client: killing ', id, paddlesList[id]);
         }
     }
 
-    eurecaClient.exports.spawnPaddle = function (i, x, y) {
+    eurecaClient.exports.spawnPaddle = function (i, x, y, idx) {
 
+        console.log('Client spawnPaddle i:%s x: %s y: %s, idx: idx', i, x, y, idx);
         if (i == myId) return; //this is me
-
-        console.log('SPAWN Paddle');
+        
         var pad = new Paddle(i, game, paddle);
         paddlesList[i] = pad;
     }
