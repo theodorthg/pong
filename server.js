@@ -24,7 +24,7 @@ console.log('Attached New Eureca Server');
 eurecaServer.onConnect(function (conn) {    
     console.log('Server onConnect. New Client id=%s ', conn.id, conn.remoteAddress);
 	if (Object.keys(clients).length >= 2) {
-		console.log('Server: to many clients: count =', Object.keys(clients).length);
+		console.log('Server: to many clients: count = ', Object.keys(clients).length);
 		return;
 	}
 	//the getClient method provide a proxy allowing us to call remote client functions
