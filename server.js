@@ -77,14 +77,8 @@ eurecaServer.exports.handshake = function()
 		for (var cc in clients)
 		{		
 			//send latest known position
-			var x;
-			if (clients[cc].idx == 0) {
-				x = 0;
-			}
-			else {
-				x = 800-8;
-			}
-			// var x = clients[cc].laststate ? clients[cc].laststate.x:  0;
+			
+			var x = clients[cc].laststate ? clients[cc].laststate.x:  0;
 			var y = clients[cc].laststate ? clients[cc].laststate.y:  0;
 
 			console.log('Server handshake calling remote spawnPaddle() id: %s, x: %s, y: %s, idx: %s', clients[cc].id, x, y, clients[cc].idx);
