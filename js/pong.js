@@ -43,7 +43,7 @@ var eurecaClientSetup = function () {
         console.log('Client spawnPaddle i:%s x: %s y: %s, idx: idx', i, x, y, idx);
         if (i == myId) return; //this is me
         
-        var pad = new Paddle(i, game, paddle);
+        var pad = new Paddle(i, game, paddle, x, y, idx);
         paddlesList[i] = pad;
     }
 
@@ -58,7 +58,7 @@ var eurecaClientSetup = function () {
 }
 
 
-Paddle = function (index, game, player) {
+Paddle = function (index, game, player, x, y, idx) {
     this.cursor = {
         down: false,
         up: false,
@@ -68,9 +68,14 @@ Paddle = function (index, game, player) {
         down: false,
         up: false,
     }
-
-    var x = 0;
-    var y = 0;
+    if (idx == 0) {
+        x = 0;
+    }
+    else {
+        x = 800-32;
+    }
+    // var x = 0;
+    // var y = 0;
 
     this.game = game;
     this.player = player;
@@ -78,7 +83,7 @@ Paddle = function (index, game, player) {
     this.paddle = game.add.sprite(x, y, 'paddle');
 
     this.paddle.id = index;
-    console.log('Paddle-index: %s', index);
+    console.log('Paddle-index: %s, idx: %s',index, idx);
 }
 
 Paddle.prototype.update = function() {

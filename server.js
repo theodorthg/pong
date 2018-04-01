@@ -9,10 +9,10 @@ app.use(express.static(__dirname));
 var clients = {};
   
 //get EurecaServer class
-var EurecaServer = require('eureca.io').EurecaServer;
+var Eureca = require('eureca.io');
 
 //create an instance of EurecaServer
-var eurecaServer = new EurecaServer({allow:['setId', 'spawnPaddle', 'updateState', 'kill']});
+var eurecaServer = new Eureca.Server({allow:['setId', 'spawnPaddle', 'updateState', 'kill']});
 
 //attach eureca.io to our http server
 eurecaServer.attach(server);
@@ -103,4 +103,4 @@ eurecaServer.exports.handleKeys = function (keys) {
 		clients[c].laststate = keys;
 	}
 }
-server.listen(8000);
+server.listen(61000);
